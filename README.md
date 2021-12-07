@@ -1,8 +1,8 @@
-# IndieWeb Utilities
+# Python IndieWeb Utilities
 
 *NOTE: This library is not yet ready for release or use.*
 
-This library contains utilities to aid the implementation of various IndieWeb specifications and functionalities.
+This Python library contains utilities to aid the implementation of various IndieWeb specifications and functionalities.
 
 ## Feature Set
 
@@ -56,7 +56,7 @@ To find the post type associated with a web page, you can use the `get_post_type
 
 The `get_post_type` function function uses the following syntax:
 
-    get_post_type(url, custom_properties=[])
+    indieweb_utils.post_type_discovery.get_post_type(url, custom_properties=[])
 
 Here are the arguments you can use:
 
@@ -91,7 +91,7 @@ Here is an example of the `get_post_type` function in use:
 
     url = "https://jamesg.blog/2021/12/06/advent-of-bloggers-6/"
 
-    post_type = indieauth_helpers.discover_endpoint(url)
+    post_type = indieweb_utils.post_type_discovery.discover_endpoint(url)
 
     print(post_type)
 
@@ -119,11 +119,24 @@ If a webmention endpoint could not be found, URL will be equal to None. A string
 
 ### Canonicalize a URL
 
+Canonicalization turns a relative URL into a complete URL.
+
 To canonicalize a URL, use this function:
 
-    url = canonicalize_url(old_url)
+    url = indieweb_utils.canonicalize.canonicalize_url(old_url, domain)
 
-This function will return a URL with a protocol, host, and path, given i
+This function requires two arguments.
+
+- `url`: The URL to canonicalize.
+- `domain`: The domain to use during canonicalization.
+
+This function will return a URL with a protocol, host, and path.
+
+The domain of the resource is needed so that it can be added to the URL during canonicalization if the URL is relative.
+
+A complete URL returned by this function will look like this:
+
+    https://indieweb.org/POSSE
 
 ### Discover an Article Author
 
@@ -131,7 +144,7 @@ You can discover the original author of an article as per the Authorship Specifi
 
 To do so, use this function:
 
-    post_type = indieauth_helpers.discover_endpoint(url)
+    post_type = indieauth_helpers.authorship_discovery.discover_author(url)
 
 Here are the arguments you can use:
 
@@ -157,7 +170,7 @@ Here is an example of the `discover_author` function in action:
 
     url = "https://aaronparecki.com/2021/12/07/8/drone"
 
-    post_type = indieauth_helpers.discover_endpoint(url)
+    post_type = indieauth_helpers.authorship_discovery.discover_author(url)
 
     print(post_type)
 
@@ -181,7 +194,7 @@ This function implements a callback handler to verify the response frmo an autho
 
 To use this function, you need to pass in the following arguments:
 
-    message, response = indieauth_callback_handler(
+    message, response = indieweb_utils.auth.indieauth_callback_handler(
         code, # The code that was returned by the IndieAuth server
         state, # The state that was returned by the IndieAuth server
         token_endpoint, # The token endpoint to which the callback POST request should be sent
