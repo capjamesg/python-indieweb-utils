@@ -9,11 +9,11 @@ This Python library contains utilities to aid the implementation of various Indi
 This package provides functions that cater to the following needs:
 
 - Generating reply context for a given page.
-- Finding the original version of a post per the Original Post Discovery specification.
-- Finding the post type per the Post Type Discovery W3C note.
-- Finding the webmention endpoint on a page, if one is provided.
+- Finding the original version of a post per the [Original Post Discovery](https://indieweb.org/original-post-discovery#Algorithm) specification.
+- Finding the post type per the [Post Type Discovery](https://ptd.spec.indieweb.org/) W3C note.
+- Finding the [webmention endpoint on a page](https://webmention.net/draft/#sender-discovers-receiver-webmention-endpoint), if one is provided.
 - Canonicalizing a URL.
-- Discovering the author of a post per the Authorship Specification.
+- Discovering the author of a post per the [Authorship](https://indieweb.org/authorship-spec) Specification.
 - Handling the response from an IndieAuth callback request.
 
 ## Why Use indieweb-utils?
